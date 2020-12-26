@@ -28,6 +28,15 @@
         "array-bracket-spacing": ["error", "always"],
         "no-extra-parens": ["error", "all"],
         "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+        "import/no-extraneous-dependencies": [
+            "warn",
+            {
+                "devDependencies": false,
+                "optionalDependencies": false,
+                "peerDependencies": false
+            }
+        ],
+        "no-param-reassign": ["error", { "props": false }],
         // Best Practices
         "accessor-pairs": [
             "warn",
