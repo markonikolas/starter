@@ -52,9 +52,7 @@ module.exports = env => {
 		compress: true,
 		hot: true,
 		watchContentBase: true
-		// open: {
-		// 	target: 'navigator'
-		// },
+
 	};
 	const watchOptions = {
 		ignored: /node_modules/,
@@ -63,7 +61,7 @@ module.exports = env => {
 	};
 
 	const sourceMap = {
-		sourceMap: isDev
+		sourceMap: isDev && 'cheap-source-map'
 	};
 
 	const modules = {

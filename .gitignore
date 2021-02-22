@@ -1,4 +1,12 @@
-/node_modules
+# build ignores
 /dist
 /public
 /build
+
+# Sass and css maps
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
+/node_modules
