@@ -107,14 +107,8 @@ module.exports = env => {
 					name: `${BUILD_ASSETS_DIR}/images/${assetFilename}.[ext]`,
 					limit: inWatchMode.check( 10240, false )
 				}
-			},
-			{
-				test: /\.pug$/i,
-				loader: 'pug-loader',
-				options: {
-					esModule: false
-				}
 			}
+
 		]
 	};
 
@@ -166,7 +160,7 @@ module.exports = env => {
 			verbose: true
 		} ),
 		new HTMLWebpackPlugin( {
-			template: 'src/templates/template.pug',
+			template: 'src/template.html',
 			filename: 'index.html',
 			showErrors: isDev,
 			minify: !isDev,
@@ -185,7 +179,7 @@ module.exports = env => {
 				proxy: 'http://localhost:8080/',
 
 				files: [
-					'**/template.pug', // reload on html change
+					'**/template.html', // reload on html change
 					{
 						match: '**/*.js',
 						options: {

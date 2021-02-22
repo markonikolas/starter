@@ -1,2 +1,1 @@
-// import utils from './utils/util';
-// import Greeting from './class/Greeting';
+// Import scripts from this folder
