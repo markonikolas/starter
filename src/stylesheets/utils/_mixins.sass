@@ -27,11 +27,12 @@
 		@content
 
 // Custom mixins
-@mixin fonts($font_weights, $italics: false)
-	@each $name, $weight in $font-weights
+// 
+@mixin fonts($font_weights, $ext, $italics: false)
+	@each $label, $weight in $font-weights
 		@font-face
 			font-family: "#{$font-name}"
-			src: url("#{$assets-url}/fonts/OpenSans-#{$name}.ttf")
+			src: url("#{$assets-url}/fonts/#{$font-name}-#{$label}.#{$ext}") 
 			font-weight: $weight
 
 			@if $italics

@@ -5,11 +5,12 @@
 
 // Include base fonts
 
-$font-name: 'Open Sans'
+$font-name: 'OpenSans'
+$ext: 'ttf'
 $font-weights: ('Light': 300, 'Regular': 400, 'SemiBold': 600, 'Bold': 700, 'ExtraBold': 800 )
-@include fonts($font_weights)
+@include fonts($font_weights, $ext)
 
 // Include italics if any.
 
 $font-italics: ('LightItalic': 300, 'Italic': 400, 'SemiBoldItalic': 600, 'BoldItalic': 700, 'ExtraBoldItalic': 800 )
-@include fonts($font_italics, true)
+@include fonts($font_italics, $ext, true)
