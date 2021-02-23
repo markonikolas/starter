@@ -61,7 +61,7 @@ module.exports = env => {
 	};
 
 	const sourceMap = {
-		sourceMap: isDev && 'cheap-source-map'
+		sourceMap: isDev
 	};
 
 	const modules = {
