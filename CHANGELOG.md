@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Changed
+- Update entry sass file
 - Update .editorconfig
 
 ## [1.1.0] - 2021-05-20
