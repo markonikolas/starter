@@ -1,6 +1,6 @@
 # This file contains history of the project
 
-## [Unreleased]
+## [1.1.0] - 2021-05-20
 ### Changed
 - Update package details
 - Update dependencies
