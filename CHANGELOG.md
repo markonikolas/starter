@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Changed
+- Update dependencies
 - Update Gitignore
 
 ### Added
