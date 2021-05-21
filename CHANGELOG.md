@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### Changed
+- Rename styles folder 'utils' to 'abstracts'
 - Update entry sass file
 - Update .editorconfig
 
