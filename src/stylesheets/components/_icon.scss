@@ -1,20 +1,19 @@
 .icon {
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  margin: 0 5px;
-  background: no-repeat / center;
-  background-size: cover;
-  vertical-align: middle;
-
-  &--js {
-    background-image: url('/src/assets/icons/icon-js.svg');
-  }
-
-  &--sass {
-    background-image: url('/src/assets/icons/icon-sass.svg');
-  }
-
+				display: inline-block;
+				width: 25px;
+				height: 25px;
+				margin: 0 5px;
+				background: no-repeat / center;
+				background-size: cover;
+				vertical-align: middle;
+				
+				&--js {
+								background-image: url("/src/assets/icons/icon-js.svg");
+				}
+				
+				&--sass {
+								background-image: url("/src/assets/icons/icon-sass.svg");
+				}
 }
 
 
