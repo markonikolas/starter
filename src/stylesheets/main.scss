@@ -1,15 +1,17 @@
-@charset "UTF-8";
-
-// 1. Vendors (imported from node_modules)
-@import '~normalize.css';
-
+// Modified version of Kitty Giraudel's
+// https://github.com/KittyGiraudel/sass-boilerplate
+// extracted in submodule for easier management.
+// Variables are declared with !default property,
+// so it can safely be overridden in project files.
+// 1. Vendors
 // 2. Configuration and helpers
-@import 'abstracts/variables';
-@import 'abstracts/functions';
-@import 'abstracts/mixins';
-
 // 3. Base stuff
-@import 'base/base';
+@import 'sass-boilerplate/stylesheets/main.scss';
+
+// 2. Additional abstracts that are project specific.
+@import 'abstracts/variables';
+
+// 3. More base stuff
 @import 'base/fonts';
 
 // 4. Layout-related sections
@@ -19,8 +21,7 @@
 // 5. Components
 @import 'components/button';
 
-// These can be removed as they are used
-// only by the template itself.
+// These can be removed as they are used only for demonstration.
 @import 'components/message';
 @import 'components/icon';
 

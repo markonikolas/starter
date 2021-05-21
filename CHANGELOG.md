@@ -7,6 +7,7 @@
 - Update .editorconfig
 
 ### Removed
+- Remove shared stylesheets
 - Remove some icons
 
 ## [1.1.0] - 2021-05-20
