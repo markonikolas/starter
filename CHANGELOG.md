@@ -5,6 +5,9 @@
 - Update entry sass file
 - Update .editorconfig
 
+### Removed
+- Remove some icons
+
 ## [1.1.0] - 2021-05-20
 ### Changed
 - Update package details
