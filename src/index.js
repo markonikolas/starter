@@ -1,7 +1,4 @@
-// Font imports in "./stylesheets/base/_fonts.sass"
-
-// Styles
-import './stylesheets/main.sass';
+import './stylesheets/main.scss';
 import './scripts';
 
 // Only files accepted here will be hot reloaded.
