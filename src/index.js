@@ -1,11 +1,14 @@
-import './stylesheets/main.scss';
 import './scripts';
+import './stylesheets/main.scss';
 
 // Only files accepted here will be hot reloaded.
 // When making changes in this file be sure to reload the page.
-if ( module && module.hot ) {
-	module.hot.accept( './scripts/', () => 'Module accepted.' );
+const acceptModule = () => 'Module accepted.';
+const { hot } = module;
+
+if ( module && hot ) {
+	hot.accept( './scripts/', acceptModule );
 }
 
-// aditional settings for hmr go here
+// Additional settings for hot module replacement here
 // e. g. how DOM handles 'unmounting' nodes
