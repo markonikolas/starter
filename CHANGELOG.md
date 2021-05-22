@@ -6,6 +6,9 @@
 - Update entry sass file
 - Update .editorconfig
 
+### Added
+- Add pages, themes and sections to stylesheets
+
 ### Removed
 - Remove shared stylesheets
 - Remove some icons
