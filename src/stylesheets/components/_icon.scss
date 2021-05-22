@@ -1,3 +1,7 @@
+// --------------------------------------------------------------
+// This file contains all styles related to the icon component.
+// --------------------------------------------------------------
+
 .icon {
 				display: inline-block;
 				width: 25px;
@@ -8,11 +12,11 @@
 				vertical-align: middle;
 				
 				&--js {
-								background-image: url("/src/assets/icons/icon-js.svg");
+								background-image: url('/src/assets/icons/icon-js.svg');
 				}
 				
 				&--sass {
-								background-image: url("/src/assets/icons/icon-sass.svg");
+								background-image: url('/src/assets/icons/icon-sass.svg');
 				}
 }
 

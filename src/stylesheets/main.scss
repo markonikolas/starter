@@ -1,29 +1,31 @@
+// --------------------------------------------------------------
 // Modified version of Kitty Giraudel's
-// https://github.com/KittyGiraudel/sass-boilerplate
-// extracted in submodule for easier management.
+// https://github.com/KittyGiraudel/sass-boilerplate.
+// Extracted in submodule for easier management.
 // Variables are declared with !default property,
 // so it can safely be overridden in project files.
-// 1. Vendors
-// 2. Configuration and helpers
-// 3. Base stuff
-@import 'sass-boilerplate/stylesheets/main.scss';
+// --------------------------------------------------------------
 
-// 2. Additional abstracts that are project specific.
+// 1. Abstracts
 @import 'abstracts/variables';
 
-// 3. More base stuff
+// 2. Base stuff
 @import 'base/fonts';
 
-// 4. Layout-related sections
+// 3. Layout-related sections
 @import 'layout/header';
 @import 'layout/footer';
 
-// 5. Components
+// 4. Components
 @import 'components/button';
-
-// These can be removed as they are used only for demonstration.
-@import 'components/message';
 @import 'components/icon';
+@import 'components/message';
 
-// 6. Page-specific styles
-// 7. Themes if any.
+// 5. Page-specific styles
+@import 'pages/home';
+
+// 6. Sections
+@import 'sections/hero';
+
+// 7. Themes
+@import 'themes/default';
