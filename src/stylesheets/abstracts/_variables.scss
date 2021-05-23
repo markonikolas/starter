@@ -14,32 +14,32 @@ $code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono',
 
 /// Copy text color
 /// @type Color
-$text-color: rgb(34, 34, 34) !default;
+$text-color: #222222FF !default;
 
 /// Main brand color
 /// @type Color
-$brand-color: rgb(229, 0, 80) !default;
+$brand-color: #E50050FF !default;
 
 /// Light grey
 /// @type Color
-$light-grey: rgb(237, 237, 237) !default;
+$light-grey: #EDEDEDFF !default;
 
 /// Medium grey
 /// @type Color
-$mid-grey: rgb(153, 153, 153) !default;
+$mid-grey: #999999FF !default;
 
 /// Dark grey
 /// @type Color
-$dark-grey: rgb(68, 68, 68) !default;
+$dark-grey: #444444FF !default;
 
 /// Container's maximum width
 /// @type Length
-$max-width: 1180px !default;
+$max-width: 80rem !default;
 
 /// Breakpoints map
 /// @prop {String} keys - Keys are identifiers mapped to a given length
-/// @prop {Map} values - Values are actual breakpoints expressed in pixels
-$breakpoints: ('small': 320px, 'medium': 768px, 'large': 1024px) !default;
+/// @prop {Map} values - Values are actual breakpoints expressed in em's
+$breakpoints: ('small': 20em, 'medium':48em, 'large': 64em, 'max': 160em) !default;
 
 /// Relative or absolute URL where all assets are served from
 /// @type String
