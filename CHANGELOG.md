@@ -9,6 +9,7 @@
 - Update .editorconfig
 
 ### Added
+- Add dotenv
 - Add crtical fonts
 - Add pages, themes and sections to stylesheets
 
