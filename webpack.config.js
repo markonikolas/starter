@@ -1,5 +1,7 @@
 module.exports = env => {
 	const path = require( 'path' );
+	
+	// Init dotenv
 	const dotenvConfigOutput = require( 'dotenv' )
 		.config();
 	
@@ -7,7 +9,7 @@ module.exports = env => {
 		throw dotenvConfigOutput.error;
 	}
 	
-	// Env
+	// Development Envs
 	const isDev = !env.production;
 	const isWatching = !!env.watch;
 	const isAnalyze = !!env.analyze;
@@ -77,9 +79,9 @@ module.exports = env => {
 				test: /\.(png|jpe?g|svg)$/i,
 				loader: 'image-webpack-loader',
 				options: {
+					limit: inlineLimit,
 					enforce: 'pre',
 					bypassOnDebug: true,
-					limit: inlineLimit,
 				}
 			},
 			{
@@ -87,9 +89,9 @@ module.exports = env => {
 				loader: 'url-loader',
 				options: {
 					name: `${ assetFilename }.[ext]`,
+					limit: inlineLimit,
 					outputPath: 'static/images',
-					publicPath: '../images',
-					limit: inlineLimit
+					publicPath: '../images'
 				}
 			},
 			{
@@ -109,9 +111,9 @@ module.exports = env => {
 				loader: 'url-loader',
 				options: {
 					name: `${ assetFilename }.[ext]`,
+					limit: inlineLimit,
 					outputPath: 'static/fonts',
-					publicPath: '../fonts/',
-					limit: inlineLimit
+					publicPath: '../fonts/'
 				}
 			},
 		
@@ -158,10 +160,10 @@ module.exports = env => {
 	
 	const optimization = isWatching ? { minimize: false } : optimizationOptions;
 	
+	// *******
+	// Plugins
 	const plugins = [
-		new CleanWebpackPlugin( {
-			verbose: true
-		} ),
+		new CleanWebpackPlugin(),
 		new HTMLWebpackPlugin( {
 			template: 'src/template.html',
 			filename: 'index.html',
@@ -175,7 +177,6 @@ module.exports = env => {
 			filename: `${ BUILD_ASSETS_DIR }/styles/${ assetFilename }.css`
 		} ),
 		new BrowserSyncPlugin(
-			// BrowserSync options
 			{
 				host: 'localhost',
 				port: 8000,
@@ -200,6 +201,21 @@ module.exports = env => {
 			}, { reload: false }
 		)
 	];
+	
+	if ( WebpackManifestPlugin ) {
+		plugins.push( new WebpackManifestPlugin() );
+	}
+	
+	if ( BundleAnalyzerPlugin ) {
+		plugins.push( new BundleAnalyzerPlugin() );
+	}
+	
+	if ( SourceMapDevToolPlugin ) {
+		plugins.push( new SourceMapDevToolPlugin( {
+			filename: 'maps/[contenthash][ext].map',
+			exclude: [ 'vendor.js', 'runtime.js' ]
+		} ) );
+	}
 	
 	// *******
 	// Conditionally inserted
@@ -239,28 +255,12 @@ module.exports = env => {
 			options: sourceMap
 		}
 	];
+	
 	// Add additional loaders to the rules array
 	styleRules.use.push( ... additionalStyleLoaders );
 	modules.rules.push( styleRules );
 	
-	// *******
-	// Plugins
-	if ( WebpackManifestPlugin ) {
-		plugins.push( new WebpackManifestPlugin() );
-	}
-	
-	if ( BundleAnalyzerPlugin ) {
-		plugins.push( new BundleAnalyzerPlugin() );
-	}
-	
-	if ( SourceMapDevToolPlugin ) {
-		plugins.push( new SourceMapDevToolPlugin( {
-			filename: 'maps/[contenthash][ext].map',
-			exclude: [ 'vendor.js', 'runtime.js' ]
-		} ) );
-	}
-	
-	const config = {
+	return {
 		mode,
 		target,
 		devtool,
@@ -270,8 +270,7 @@ module.exports = env => {
 		watchOptions,
 		module: modules,
 		optimization,
-		plugins
+		plugins,
 	};
 	
-	return config;
 };
