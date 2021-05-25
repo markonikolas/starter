@@ -2,7 +2,10 @@
 // This file contains all application-wide Sass variables.
 // --------------------------------------------------------------
 
-@import '../sass-boilerplate/stylesheets/abstracts/variables';
+$open-sans-regular: '../assets/fonts/woff2/OpenSans-Regular.woff2';
+$open-sans-light: '../assets/fonts/woff2/OpenSans-Light.woff2';
+$open-sans-semi-bold: '../assets/fonts/woff2/OpenSans-SemiBold.woff2';
+$open-sans-bold: '../assets/fonts/woff2/OpenSans-Bold.woff2';
 
 // This is a test to check whether a default $text-font-stack
 // is overridden by project's $text-font-stack

@@ -7,6 +7,7 @@
 - Update .editorconfig
 
 ### Added
+- Add crtical fonts
 - Add pages, themes and sections to stylesheets
 
 ### Removed
