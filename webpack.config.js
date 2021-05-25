@@ -6,14 +6,6 @@ module.exports = env => {
 	const isWatching = !!env.watch;
 	const isAnalyze = !!env.analyze;
 	
-	// Helpers
-	const Ternary = require( './helper/Ternary' );
-	
-	// Modes
-	// Returns first parameter if in n mode, second otherwise
-	const inDevMode = new Ternary( isDev );
-	const inWatchMode = new Ternary( isWatching );
-	
 	// Constants
 	const APP_DIR = './src';
 	const BUILD_DIR = 'public';
@@ -21,7 +13,7 @@ module.exports = env => {
 	const ENTRY_FILENAME = 'index';
 	
 	// Filenames
-	const assetFilename = inDevMode.check( '[name]', '[contenthash]' );
+	const assetFilename = isDev ? '[name]' : '[contenthash]';
 	
 	// Plugins
 	const HTMLWebpackPlugin = require( 'html-webpack-plugin' );
@@ -36,23 +28,28 @@ module.exports = env => {
 	const CssMinimizerPlugin = !isDev && require( 'css-minimizer-webpack-plugin' );
 	
 	// Config
-	const mode = inDevMode.check( 'development', 'production' );
+	const mode = isDev ? 'development' : 'production';
+	const entryFilename = isDev ? '[name].js' : '[contenthash].js';
+	const inlineLimit = isWatching && 1000 * 10;
+	
 	// Fix for hmr not working properly because of browserslist
 	const target = 'web';
 	const devtool = false;
 	const entry = path.resolve( __dirname, APP_DIR, ENTRY_FILENAME );
 	const output = {
 		path: path.resolve( __dirname, BUILD_DIR ),
-		filename: inDevMode.check( '[name].js', '[contenthash].js' ),
-		chunkFilename: inDevMode.check( '[name]', '[contenthash].js' ),
+		filename: entryFilename,
+		chunkFilename: entryFilename,
 		publicPath: ''
 	};
+	
 	const devServer = {
 		contentBase: path.join( __dirname, BUILD_DIR ),
 		compress: true,
 		hot: true,
 		watchContentBase: true
 	};
+	
 	const watchOptions = {
 		ignored: /node_modules/,
 		aggregateTimeout: 0,
@@ -65,38 +62,21 @@ module.exports = env => {
 	
 	const modules = {
 		rules: [
+			// JS Loader
 			{
 				test: /\.js$/i,
 				exclude: /node_modules/,
 				use: 'babel-loader'
 			},
-			{
-				test: /\.svg$/i,
-				loader: 'url-loader',
-				options: {
-					name: `${ assetFilename }.[ext]`,
-					limit: inWatchMode.check( 10240, false ),
-					outputPath: 'static/icons',
-					publicPath: '../icons/',
-				}
-			},
+			
+			// Image optimization & URL Loader
 			{
 				test: /\.(png|jpe?g|svg)$/i,
 				loader: 'image-webpack-loader',
 				options: {
 					enforce: 'pre',
 					bypassOnDebug: true,
-					limit: inWatchMode.check( 10240, false )
-				}
-			},
-			{
-				test: /\.(ttf|woff|woff2|otf)$/i,
-				loader: 'url-loader',
-				options: {
-					name: `${ assetFilename }.[ext]`,
-					outputPath: 'static/fonts',
-					publicPath: '../fonts/',
-					limit: false,
+					limit: inlineLimit,
 				}
 			},
 			{
@@ -104,11 +84,33 @@ module.exports = env => {
 				loader: 'url-loader',
 				options: {
 					name: `${ assetFilename }.[ext]`,
-					limit: inWatchMode.check( 10240, false ),
 					outputPath: 'static/images',
 					publicPath: '../images',
+					limit: inlineLimit
 				}
-			}
+			},
+			{
+				test: /\.svg$/i,
+				loader: 'url-loader',
+				options: {
+					name: `${ assetFilename }.[ext]`,
+					limit: inlineLimit,
+					outputPath: 'static/icons',
+					publicPath: '../icons/',
+				}
+			},
+			
+			// Fonts Loader
+			{
+				test: /\.(ttf|woff|woff2|otf)$/i,
+				loader: 'url-loader',
+				options: {
+					name: `${ assetFilename }.[ext]`,
+					outputPath: 'static/fonts',
+					publicPath: '../fonts/',
+					limit: inlineLimit
+				}
+			},
 		
 		]
 	};
@@ -121,7 +123,7 @@ module.exports = env => {
 				defaultVendors: {
 					// Note the usage of `[\\/]` as a path separator for cross-platform compatibility.
 					test: /[\\/]node_modules[\\/]lodash-es[\\/]/,
-					filename: inDevMode.check( 'vendor.js', '[contenthash].js' ),
+					filename: isDev ? 'vendor.js' : '[contenthash].js',
 					// Tells webpack to ignore splitChunks.minSize, splitChunks.minChunks, splitChunk.
 					// maxAsyncRequests and splitChunks.maxInitialRequests options and always create
 					// chunks for this cache group.
@@ -130,7 +132,7 @@ module.exports = env => {
 				// Imported in main.sass
 				normalize: {
 					test: /[\\/]node_modules[\\/]normalize.css[\\/]/,
-					filename: inDevMode.check( 'vendor.css', '[contenthash].css' ),
+					filename: isDev ? 'vendor.css' : '[contenthash].css',
 					enforce: true
 				}
 			}
@@ -143,10 +145,7 @@ module.exports = env => {
 	const styleRules = {
 		test: /\.scss$/i,
 		use: [
-			inWatchMode.check(
-				'style-loader',
-				MiniCssExtractPlugin.loader
-			),
+			isWatching ? 'style-loader' : MiniCssExtractPlugin.loader,
 			{
 				loader: 'css-loader',
 				options: sourceMap
@@ -154,7 +153,7 @@ module.exports = env => {
 		]
 	};
 	
-	const optimization = inWatchMode.check( { minimize: false }, optimizationOptions );
+	const optimization = isWatching ? { minimize: false } : optimizationOptions;
 	
 	const plugins = [
 		new CleanWebpackPlugin( {
