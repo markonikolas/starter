@@ -1,3 +1,4 @@
 [submodule "src/stylesheets/sass-boilerplate"]
 	path = src/stylesheets/sass-boilerplate
 	url = https://github.com/markonikolas/sass-boilerplate
+	branch = main
