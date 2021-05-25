@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 ### Changed
+- Update sass boilerplate version and set branch to main
+- Update eslint config
 - Rename styles folder 'utils' to 'abstracts'
 - Update entry sass file
 - Update .editorconfig
