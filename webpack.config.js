@@ -1,5 +1,11 @@
 module.exports = env => {
 	const path = require( 'path' );
+	const dotenvConfigOutput = require( 'dotenv' )
+		.config();
+	
+	if ( dotenvConfigOutput.error ) {
+		throw dotenvConfigOutput.error;
+	}
 	
 	// Env
 	const isDev = !env.production;
@@ -7,10 +13,7 @@ module.exports = env => {
 	const isAnalyze = !!env.analyze;
 	
 	// Constants
-	const APP_DIR = './src';
-	const BUILD_DIR = 'public';
-	const BUILD_ASSETS_DIR = 'static';
-	const ENTRY_FILENAME = 'index';
+	const { APP_DIR, BUILD_DIR, BUILD_ASSETS_DIR, ENTRY_FILENAME } = process.env;
 	
 	// Filenames
 	const assetFilename = isDev ? '[name]' : '[contenthash]';
