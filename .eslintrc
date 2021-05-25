@@ -14,6 +14,7 @@
       "tab"
     ],
     "no-mixed-spaces-and-tabs": 2,
+    "template-curly-spacing": "off",
     "no-tabs": 0,
     "global-require": 0,
     "semi": [
